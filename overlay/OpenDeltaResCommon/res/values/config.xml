@@ -5,13 +5,13 @@
         <string name="filename_base" formatted="false">YAAP-%s-GMS</string>
 
 	<!-- URL base to find .update and .sign files, %s is expanded to property_device value. Path is suffixed by (expanded) filename_base -->
-	<string name="url_base_update">https://github.com/realahnet/Releases/releases/download/yaap-sixteen/</string>
+	<string name="url_base_update">https://github.com/realahnet/Releases/releases/download/yaap-sony/</string>
 
 	<!-- URL base to find the full zip files, %s is replaced to be property_device value. -->
-	<string name="url_base_full">https://github.com/realahnet/Releases/releases/download/yaap-sixteen/</string>
+	<string name="url_base_full">https://github.com/realahnet/Releases/releases/download/yaap-sony/</string>
 
 	<!-- URL base to find the full zip sha256sum files, %s is replaced to be property_device value. -->
-	<string name="url_base_full_sum">https://github.com/realahnet/Releases/releases/download/yaap-sixteen/</string>
+	<string name="url_base_full_sum">https://github.com/realahnet/Releases/releases/download/yaap-sony/</string>
 
 	<!-- URL base to fetch all builds. first %s is replaced by branch name later on by property_device -->
 	<string name="url_base_json" formatted="false">https://raw.githubusercontent.com/realahnet/ota-info/%s/%s/%s.json</string>
