@@ -245,6 +245,10 @@ TARGET_SUPPORTS_GAME_CONTROLLERS := true
 
 $(call inherit-product-if-exists, vendor/sony/extra/extra.mk)
 
+# fastbootd
+PRODUCT_PACKAGES += \
+    fastbootd
+
 # FM
 PRODUCT_PACKAGES += \
     FM2 \
