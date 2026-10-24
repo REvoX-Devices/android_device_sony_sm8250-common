@@ -194,9 +194,10 @@ include hardware/sony/sepolicy/qti/SEPolicy.mk
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_KEY_PATH := vendor/ahnet-priv/keys/avb/custom_rsa4096_private.pem
+# AOSP test keys; point these at your own keys for release builds
+BOARD_AVB_KEY_PATH ?= external/avb/test/data/testkey_rsa4096.pem
 BOARD_AVB_VBMETA_SYSTEM := system system_ext product
-BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := vendor/ahnet-priv/keys/avb/custom_rsa2048_private.pem
+BOARD_AVB_VBMETA_SYSTEM_KEY_PATH ?= external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
@@ -215,6 +216,9 @@ WIFI_FEATURE_HOSTAPD_11AX := true
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+# XperiaDevices requires Sony apps from the (private) vendor/sony/extra
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 
 include vendor/sony/sm8250-common/BoardConfigVendor.mk
 -include vendor/sony/extra/BoardConfigExtra.mk

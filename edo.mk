@@ -174,10 +174,10 @@ PRODUCT_COPY_FILES += \
 
 # Boot control
 PRODUCT_PACKAGES += \
-    android.hardware.boot-service.qti \
-    android.hardware.boot-service.qti.recovery
+    android.hardware.boot-service.sony \
+    android.hardware.boot-service.sony.recovery
 
-$(call soong_config_set,QTI_GPT_UTILS,USE_BSG_FRAMEWORK,false)
+$(call soong_config_set_bool,QTI_GPT_UTILS,USE_BSG_FRAMEWORK,false)
 
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
@@ -229,17 +229,13 @@ PRODUCT_PACKAGES += \
 
 $(call soong_config_set,EGL,USE_DISPLAY_ARRAY,true)
 
-# DisplayFeatures
-PRODUCT_PACKAGES += \
-    DisplayFeatures
-
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
 # Extras
 TARGET_SHIPS_SONY_CAMERA := true
-TARGET_SHIPS_SONY_APPS := true
+TARGET_SHIPS_SONY_APPS := false
 TARGET_SHIPS_SOUND_ENHANCEMENT := true
 TARGET_SUPPORTS_GAME_CONTROLLERS := true
 
@@ -421,7 +417,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 TARGET_SHIPS_XPERIA_DISABLER := true
 TARGET_SUPPORTS_BATT_CARE := true
 TARGET_SUPPORTS_CREATOR_MODE := true
-TARGET_SUPPORTS_HIGH_POLLING_RATE := true
+TARGET_SUPPORTS_HIGH_POLLING_RATE := false
 TARGET_SUPPORTS_MEDIA_VIBRATION := true
 
 $(call inherit-product-if-exists, hardware/sony/XperiaModules.mk)
