@@ -79,9 +79,10 @@ BOARD_DTB_OFFSET := 0x01f00000
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_KERNEL_CLANG_VERSION := r563880c
+# The first entry is the base defconfig; the others are merged on top of it
 TARGET_KERNEL_CONFIG := \
-    vendor/debugfs.config \
     vendor/kona-perf_defconfig \
+    vendor/debugfs.config \
     vendor/edo.config
 
 # Use External DTC
