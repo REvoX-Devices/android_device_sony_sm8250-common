@@ -247,7 +247,9 @@ TARGET_SHIPS_SOUND_ENHANCEMENT_LEGACY := true
 TARGET_SUPPORTS_GAME_CONTROLLERS := true
 
 $(call inherit-product, vendor/sony/extra/extra.mk)
+$(call inherit-product-if-exists, vendor/sony/extra/themes/themes.mk)
 $(call inherit-product-if-exists, vendor/sony/so51a/so51a.mk)
+$(call inherit-product, vendor/sony/revox-tweaks/revox-tweaks.mk)
 
 # fastbootd
 PRODUCT_PACKAGES += \
