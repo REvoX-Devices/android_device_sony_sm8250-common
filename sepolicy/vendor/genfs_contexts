@@ -1,0 +1,2 @@
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pm8150b@2:qcom,qpnp-smb5/somc_usb_icl_voter_effective u:object_r:vendor_sysfs_usb_supply:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pm8150b@2:qcom,qpnp-smb5/somc_fcc_voter_effective u:object_r:vendor_sysfs_battery_supply:s0

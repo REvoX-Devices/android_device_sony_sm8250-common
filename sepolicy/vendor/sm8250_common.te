@@ -1,0 +1,31 @@
+# Denials collected on the device in permissive mode (see sepolicy/tools/avc2te.py).
+# Add rules here until the device runs in enforcing mode without new denials.
+
+# chg-pwr-service (charging policy daemon) used to run in the init domain; give it its own domain.
+type chg_pwr_service, domain;
+type chg_pwr_service_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(chg_pwr_service)
+
+allow chg_pwr_service self:netlink_kobject_uevent_socket { create bind read setopt getopt };
+allow chg_pwr_service { vendor_sysfs_battery_supply vendor_sysfs_usb_supply vendor_sysfs_usbpd_device }:file rw_file_perms;
+allow chg_pwr_service { vendor_sysfs_battery_supply vendor_sysfs_usb_supply vendor_sysfs_usbpd_device }:dir search;
+allow chg_pwr_service sysfs_wake_lock:file rw_file_perms;
+
+# sysfs nodes written by init for the charging service
+allow init vendor_sysfs_battery_supply:file { open write };
+allow init vendor_sysfs_usb_supply:file { open write };
+allow init vendor_sysfs_usbpd_device:file { open write };
+
+# Dolby: daxService runs as a platform app (target SDK <= 36 gets platform_app_36)
+hal_client_domain(platform_app_36, hal_dms)
+binder_call(platform_app_36, hal_dms_default)
+binder_call(hal_dms_default, platform_app_36)
+
+# Sony camera apps talk to the IDD HAL
+allow priv_app_36 vendor_hal_idd_default:binder call;
+allow priv_app_36 vendor_hal_idd_hwservice:hwservice_manager find;
+
+# Camera HAL: secure FastRPC node
+allow hal_camera_default vendor_xdsp_device:chr_file ioctl;
+
+allow chg_pwr_service kmsg_device:chr_file { open write getattr };
