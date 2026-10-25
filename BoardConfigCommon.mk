@@ -60,7 +60,7 @@ BOARD_KERNEL_CMDLINE := \
     androidboot.hardware=qcom \
     androidboot.memcg=1 \
     androidboot.usbcontroller=a600000.dwc3 \
-    buildid=EDO-1.0.1-201109-1152 \
+    buildid=EDO-2.2.0-DOCOMO-220830-2323 \
     cgroup.memory=nokmem,nosocket \
     loop.max_part=7 \
     lpm_levels.sleep_disabled=1 \
@@ -191,6 +191,7 @@ include device/lineage/sepolicy/libion/sepolicy.mk
 include device/qcom/sepolicy_vndr/SEPolicy.mk
 include device/lineage/sepolicy/libperfmgr/sepolicy.mk
 include hardware/sony/sepolicy/qti/SEPolicy.mk
+BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
 
 # Verified Boot
 BOARD_AVB_ENABLE := true

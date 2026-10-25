@@ -37,7 +37,14 @@ PRODUCT_COPY_FILES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-yaap
+    $(LOCAL_PATH)/overlay-yaap \
+    $(LOCAL_PATH)/overlay-keyhandler
+
+# Static overlay on lineage-sdk (device key handler), not an RRO
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay-keyhandler
+
+# Camera key handler (DeviceKeyHandler)
+PRODUCT_PACKAGES += XperiaKeyHandler
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
@@ -236,10 +243,11 @@ PRODUCT_PACKAGES += \
 # Extras
 TARGET_SHIPS_SONY_CAMERA := true
 TARGET_SHIPS_SONY_APPS := false
-TARGET_SHIPS_SOUND_ENHANCEMENT := true
+TARGET_SHIPS_SOUND_ENHANCEMENT_LEGACY := true
 TARGET_SUPPORTS_GAME_CONTROLLERS := true
 
-$(call inherit-product-if-exists, vendor/sony/extra/extra.mk)
+$(call inherit-product, vendor/sony/extra/extra.mk)
+$(call inherit-product-if-exists, vendor/sony/so51a/so51a.mk)
 
 # fastbootd
 PRODUCT_PACKAGES += \
@@ -354,8 +362,13 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Sony device library
 PRODUCT_PACKAGES += \
-    com.sony.device \
+    com.sony.device
+
+# Dummy IDD only when the real one (vendor/sony/extra, used by Sony camera/audio apps) is absent
+ifeq ($(wildcard vendor/sony/so51a/so51a.mk),)
+PRODUCT_PACKAGES += \
     com.sony.idd_dummy
+endif
 
 # Storage
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
@@ -416,6 +429,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Xperia Modules
 TARGET_SHIPS_XPERIA_DISABLER := true
 TARGET_SUPPORTS_BATT_CARE := true
+TARGET_SUPPORTS_CAMERA_KEY := true
 TARGET_SUPPORTS_CREATOR_MODE := true
 TARGET_SUPPORTS_HIGH_POLLING_RATE := false
 TARGET_SUPPORTS_MEDIA_VIBRATION := true
@@ -426,3 +440,18 @@ $(call inherit-product-if-exists, hardware/sony/XperiaModules.mk)
 -include vendor/ahnet-priv/keys/keys.mk
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# Replaces GMS apps that exceed the dynamic partition size (Photos, Pixel Weather)
+PRODUCT_PACKAGES += GmsSizeTrim
+
+# QTI telephony shared libraries (needed by QtiTelephony / ims / embms blobs)
+PRODUCT_PACKAGES += \
+    extphonelib \
+    extphonelib.xml \
+    ims-ext-common \
+    ims_ext_common.xml \
+    qti-telephony-hidl-wrapper \
+    qti_telephony_hidl_wrapper.xml \
+    qti-telephony-utils \
+    qti_telephony_utils.xml
+

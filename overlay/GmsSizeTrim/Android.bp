@@ -1,0 +1,13 @@
+// Empty overlay whose only purpose is to replace GMS apps that do not fit in the dynamic
+// partition group (half of super - 4 MB) together with the Sony apps:
+//  - Photos (180 MB): install Google Photos from Play
+//  - WeatherPixelPrebuilt (41 MB): Evolution already ships OmniJaws
+runtime_resource_overlay {
+    name: "GmsSizeTrim",
+    overrides: [
+        "Photos",
+        "WeatherPixelPrebuilt_10008663",
+    ],
+    product_specific: true,
+    sdk_version: "current",
+}

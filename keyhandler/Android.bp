@@ -1,0 +1,12 @@
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+// Loaded by PhoneWindowManager through config_deviceKeyHandlerLibs.
+java_library {
+    name: "XperiaKeyHandler",
+    srcs: ["src/**/*.java"],
+    libs: ["framework"],
+    installable: true,
+    system_ext_specific: true,
+}
